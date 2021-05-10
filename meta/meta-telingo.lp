@@ -45,6 +45,26 @@ true(finally,horizon) :- formula(finally).
 formula(F) :- formula(prev(F)).
 true(prev(F),T) :- true(F,T-1), formula(prev(F)), time(T), time(T-1).
 
+% ...
+
+% always
+formula(F) :- formula(always(F)).
+%
+% true(always(F),T) :- formula(always(F)), time(T), ... .
+
+% ...
+
+% until
+formula(F) :- formula(until(F,G)).
+formula(G) :- formula(until(F,G)).
+%
+% true(until(F,G),T1) :- formula(until(F,G)), time(T1), ... .
+%
+% uses true(until(F,G),T1,T2)
+% true(until(F,G),T1,T2) :- formula(until(F,G)), time(T1), time(T2), T1<=T2,
+%                           ... .
+
+% ...
 
 %
 % Defined predicates
