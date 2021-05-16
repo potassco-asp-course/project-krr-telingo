@@ -1,14 +1,13 @@
-% clingo example1.lp --output=reify | clingo - meta-telingo.lp -c horizon=5 0
-
+% clingo example4.lp --output=reify | clingo - meta-telingo.lp -c horizon=3 0
 
 %
 % Temporal program
 %
 
-a :- initially.
-b :- prev(prev(a)).
-a :- prev(prev(b)).
+wprev(a).
 
+    {b} :-        initially.
+prev(c) :- not b, initially.
 
 %
 % Display
@@ -16,6 +15,7 @@ a :- prev(prev(b)).
 
 #show show(a). % corresponds to #show a : a.
 #show show(b). % corresponds to #show b : b.
+#show show(c). % corresponds to #show c : c.
 
 
 %
@@ -23,5 +23,3 @@ a :- prev(prev(b)).
 %
 
 #external initially.
-#external prev(prev(a)).
-#external prev(prev(b)).
